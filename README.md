@@ -4,22 +4,7 @@
 
 ---
 
-## 📌 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Quick Start](#quick-start)
-- [How It Works](#how-it-works)
-- [Dashboard Pages](#dashboard-pages)
-- [Feature Engineering](#feature-engineering)
-- [Risk Tiers](#risk-tiers)
-- [Model Performance](#model-performance)
-- [Dataset Format](#dataset-format)
-- [Deployment (Streamlit Cloud)](#deployment-streamlit-cloud)
-- [Tech Stack](#tech-stack)
-
----
+> The app will be live at `https://intern-performance-checker.streamlit.app/`
 
 ## Overview
 
@@ -40,7 +25,6 @@ This project uses **Random Forest** and **XGBoost** to predict intern performanc
 | 🚨 Risk Flagging | Automatically classifies every intern into 4 risk tiers with alert reasons |
 | 🔮 Live Predictor | Adjust sliders to predict any intern's score in real time |
 | 📥 Export Reports | Download full or filtered intern reports as CSV |
-| 🧠 5 Engineered Features | Composite signals like productivity index and burnout risk |
 
 ---
 
@@ -139,20 +123,6 @@ python pretrain.py --data your_new_data.csv
 
 ---
 
-## Feature Engineering
-
-Five composite features are automatically derived from raw inputs before scoring:
-
-| Feature | Formula | What it captures |
-|---|---|---|
-| `productivity_index` | `completion_rate × (1 − time/15) × (1 − missed/10)` | Output quality adjusted for speed and reliability |
-| `reliability_score` | `attendance × 0.6 + deadline_adherence × 0.4` | Consistency and dependability |
-| `engagement_score` | `avg(communication, learning, meetings, commits) / 4` | Active participation and growth |
-| `burnout_risk` | `stress × 0.6 + (hours/12) × 0.4` | Risk of overload and disengagement |
-| `overall_quality` | `productivity×0.35 + reliability×0.25 + engagement×0.25 + (1−burnout)×0.15` | Single composite health score |
-
----
-
 ## Risk Tiers
 
 | Tier | Score | Recommended Action |
@@ -209,34 +179,3 @@ Your CSV must contain these columns:
 | `performance_category` | str | `Excellent` / `Average` / `Needs Improvement` |
 
 ---
-
-## Deployment (Streamlit Cloud)
-
-1. Push the project folder to a **GitHub repository**
-2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**
-3. Select your repo and point the main file to `app.py`
-4. Make sure `pretrained_model.pkl` is committed to the repo
-5. Click **Deploy** — done
-
-> The app will be live at `https://your-app-name.streamlit.app`
-
----
-
-## Tech Stack
-
-| Library | Purpose |
-|---|---|
-| `streamlit` | Web dashboard |
-| `xgboost` | Primary prediction model |
-| `scikit-learn` | Random Forest, cross-validation, metrics |
-| `pandas` / `numpy` | Data processing and feature engineering |
-| `plotly` | Interactive charts |
-| `shap` | Model explainability (used in pipeline) |
-| `matplotlib` | SHAP plot rendering |
-
----
-
-## Author
-
-Built for the **Intern Performance Prediction** project.  
-Model trained on 6,000 real intern records · XGBoost R² = 0.8764
